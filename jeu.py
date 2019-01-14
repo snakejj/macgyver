@@ -19,7 +19,7 @@ from random import randrange
 ################################################################################
 # Definition des fonctions
 
-def checkpygame():
+def initpygame():
 
     check = pygame.init()
     if check[1] != 0:
@@ -52,9 +52,48 @@ with open("map.txt", "r") as fichier_carte :    #Ouverture du fichier map.txt da
 # Le jeu
 
 
-checkpygame()
+initpygame()   #Appel de la fonction pygame to check if tt est OK
 
-print(carte)
+fenetre = pygame.display.set_mode((300, 300))   #Taille pour 15 bloc de 20px
+
+fond = pygame.image.load("ressources/sol.jpg").convert()    #Load background
+
+#Boucle pour afficher le fond (un peu brouillon peut etre)
+
+i_x = 0
+i_y = 0
+
+while i_x < 300:
+    fenetre.blit(fond, (i_x,0))
+    i_x +=20
+while i_y <300 :
+    i_x = 0
+    i_y +=20
+    while i_x < 300:
+        fenetre.blit(fond, (i_x,i_y))
+        i_x +=20
+    
+
+    
+    
+    
+
+pygame.display.flip()
+
+#BOUCLE INFINIE
+continuer = 1
+while continuer:
+    continuer = int(input())
+
+
+
+
+#Changement des "X" par une image
+
+with open("ressources/sol.jpg", "r") as image_sol :
+    sol = image_sol.read()
+
+carte_ac_sol = carte.replace("X", sol)
 
 
 
