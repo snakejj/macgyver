@@ -14,6 +14,8 @@ Docstring du jeu
 
 import os
 import pygame
+from pygame.locals import *
+
 from random import randrange
 
 ################################################################################
@@ -46,7 +48,24 @@ Chargement de PyGame : OK
 #--------
                      
 with open("map.txt", "r") as fichier_carte :    #Ouverture du fichier map.txt dans var fichier_carte
-    carte = fichier_carte.read()                #Stockage de la map dans la variable carte
+    carte = []
+    for line in fichier_carte:  
+        carte_l = []
+        
+        for character in line:
+            if character != "\n":
+                carte_l.append(character)
+        
+        if carte_l:
+            carte.append(carte_l)       
+ 
+    print(carte)
+
+
+
+
+
+"""
 
 ################################################################################
 # Le jeu
@@ -58,7 +77,7 @@ fenetre = pygame.display.set_mode((300, 300))   #Taille pour 15 bloc de 20px
 
 fond = pygame.image.load("ressources/sol.jpg").convert()    #Load background
 
-#Boucle pour afficher le fond (un peu brouillon peut etre)
+#Boucle pour afficher le fond (peut surement etre optimisé)
 
 i_x = 0
 i_y = 0
@@ -74,16 +93,36 @@ while i_y <300 :
         i_x +=20
     
 
-    
-    
-    
+#Afficher MacGyver
 
-pygame.display.flip()
+macgyver = pygame.image.load("ressources/MacGyver.png").convert_alpha()
 
-#BOUCLE INFINIE
+m_x = 60
+m_y = 60
+fenetre.blit(macgyver,(m_x,m_y))
+    
+    
+#mise en place des deplacements (CA BLOQUE JE NE SAIS PAS POURQUOI !!!!!!!!!!!!)
+
+if event.type == KEYDOWN:
+    if event.key == K_DOWN:
+        m_y+=20
+        fenetre.blit(macgyver,(m_x,m_y))
+    if event.key == K_UP:
+        fenetre.blit(macgyver,(m_x,m_y))
+        m_x+=20
+
+pygame.display.flip()       #Rafraichissement de l'affichage
+
+
+#Boucle infinie pour laisser la fenetre ouverte
 continuer = 1
+
 while continuer:
-    continuer = int(input())
+	for event in pygame.event.get():   #On parcours la liste de tous les événements reçus
+		if event.type == QUIT:     #Si un de ces événements est de type QUIT
+			continuer = 0      #On arrête la boucle
+
 
 
 
@@ -109,13 +148,12 @@ carte_ac_sol = carte.replace("X", sol)
 
 #*******************************************************************************
 # BROUILLON
-"""
 
 fichier_carte = open("map.txt","r")     #Ouverture du fichier map.txt
 carte = fichier_carte.read()            #Capture du contenu dans la var *carte*
 fichier_carte.close()                   #Fermeture du fichier map.txt
 print(carte)                            #Affichage de la carte
 
-"""
 
+"""
 
