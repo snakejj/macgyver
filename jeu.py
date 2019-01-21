@@ -1,3 +1,4 @@
+# -*-coding:utf-8 -*
 ################################################################################
 #   PSEUDO CODE
 #-------------------------------------------------------------------------------
@@ -38,7 +39,17 @@ Chargement de PyGame : OK
 
 """)
 
-
+def allmap():
+    for l in range(15):
+        for e in range(15):
+            if carte[l][e] == "X":
+                fenetre.blit(mur, (e*20,l*20))
+            elif carte[l][e] == "M":
+                fenetre.blit(mac, (e*20,l*20))
+            elif carte[l][e] == "G":
+                fenetre.blit(grd, (e*20,l*20))
+            else  :
+                fenetre.blit(sol, (e*20,l*20))
 
 
 ################################################################################
@@ -51,21 +62,23 @@ with open("map.txt", "r") as fichier_carte :    #Ouverture du fichier map.txt da
     carte = []
     for line in fichier_carte:  
         carte_l = []
-        
         for character in line:
             if character != "\n":
                 carte_l.append(character)
         
         if carte_l:
             carte.append(carte_l)       
- 
-    print(carte)
 
 
 
 
 
-"""
+
+
+
+
+
+
 
 ################################################################################
 # Le jeu
@@ -75,12 +88,74 @@ initpygame()   #Appel de la fonction pygame to check if tt est OK
 
 fenetre = pygame.display.set_mode((300, 300))   #Taille pour 15 bloc de 20px
 
-fond = pygame.image.load("ressources/sol.jpg").convert()    #Load background
+sol = pygame.image.load("ressources/sol.jpg").convert()    #Load background
+mur = pygame.image.load("ressources/mur.jpg").convert()
+mac = pygame.image.load("ressources/mac.png").convert()
+grd = pygame.image.load("ressources/grd.png").convert()
 
-#Boucle pour afficher le fond (peut surement etre optimisé)
+#Boucle pour afficher les murs, sols, macgyver et le gardien
+#------------------------------------------------------------
 
-i_x = 0
-i_y = 0
+
+
+allmap()
+
+
+
+#Boucle infinie pour laisser la fenetre ouverte
+continuer = 1
+
+while continuer:
+    for event in pygame.event.get(): #On parcours la liste de tt les event reçus
+        if event.type == QUIT:     #Si un de ces événements est de type QUIT
+            continuer = 0      #On arrête la boucle
+
+#mise en place des deplacements de sorte a pouvoir switcher entre terminal et 
+#pygame , c a d changer la map stocker en variable
+
+
+        if event.type == KEYDOWN:
+            if event.key == K_DOWN:
+                idx = sum(carte,[]).index("M")
+                idx = idx/3,idx%3
+                print(idx)
+                allmap()
+            if event.key == K_UP:
+                for l in range(15):
+                    for e in range(15):        
+                        if carte[l][e] == "M":
+                            carte[l][e] = "@"
+                            carte[l+1][e] = "M"
+                            allmap()
+            if event.key == K_LEFT:
+                for l in range(15):
+                    for e in range(15):        
+                        if carte[l][e] == "M":
+                            carte[l][e] = "@"
+                            carte[l][e-1] = "M"
+                            allmap()
+            if event.key == K_RIGHT:
+                for l in range(15):
+                    for e in range(15):        
+                        if carte[l][e] == "M":
+                            carte[l][e] = "@"
+                            carte[l][e+1] = "M"
+                            allmap()
+
+
+    pygame.display.flip()       #Rafraichissement de l'affichage
+
+
+
+
+
+        
+
+"""
+#####################
+#####################
+#####################
+
 
 while i_x < 300:
     fenetre.blit(fond, (i_x,0))
@@ -92,6 +167,8 @@ while i_y <300 :
         fenetre.blit(fond, (i_x,i_y))
         i_x +=20
     
+
+
 
 #Afficher MacGyver
 
@@ -156,4 +233,21 @@ print(carte)                            #Affichage de la carte
 
 
 """
+'''
+l = 0
+e = 0
+
+
+while l < 15 : 
+    
+    while e < 15 :
+        if carte[l][e] == "X":
+            fenetre.blit(mur, (e*20,l*20))
+        else :
+            fenetre.blit(sol, (e*20,l*20))
+        
+        e += 1
+    l +=1
+    e = 0
+'''
 
