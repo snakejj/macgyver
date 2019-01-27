@@ -1,6 +1,7 @@
 # -*-coding:utf-8 -*
 
 import pygame
+
 from pygame.locals import *
 
 class Map:
@@ -88,6 +89,7 @@ class Map:
         #Boucle pour afficher les murs, sols, macgyver et le gardien
         #------------------------------------------------------------
 
+        
                 if event.type == KEYDOWN:
                     if event.key == K_DOWN:
                         pass
@@ -97,5 +99,6 @@ class Map:
                         pass
                     if event.key == K_RIGHT:
                         pass
+
 
             pygame.display.flip()       #Rafraichissement de l'affichage

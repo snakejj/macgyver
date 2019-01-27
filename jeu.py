@@ -16,7 +16,6 @@ from pygame.locals import *
 from random import randrange
 from classes.mac import Mac
 from classes.map import Map
-from classes.pyg import Pyg
 
 # ##############################################################################
 # Definition des fonctions
@@ -29,17 +28,16 @@ from classes.pyg import Pyg
 #--------
                         
 Map.load_cart() # Chargement de la map depuis la classe Map
-carte = Map.load_cart()
+
 
 # ##############################################################################
 # Le jeu
 
 
-Pyg.initpygame()   # Appel de la fonction pygame to check if tt est OK
-Pyg.load_map() 
-Pyg.display_map()
-
-Pyg.loop()    # Boucle which is une methode de la classe Pyg
+Map.initpygame()   # Appel de la fonction pygame to check if tt est OK
+Map.load_cart() 
+Map.display_map()
+Map.loop()    # Boucle which is une methode de la classe Pyg
 
 
 
