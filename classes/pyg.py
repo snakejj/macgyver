@@ -58,7 +58,7 @@ class Pyg:
 
 
     @staticmethod
-    def boucle():
+    def loop():
         #Boucle infinie pour laisser la fenetre ouverte
         continuer = 1
 

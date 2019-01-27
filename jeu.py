@@ -2,12 +2,12 @@
 
 
 """
-Docstring du jeu
+Game docstring
 """
 
 
 # ##############################################################################
-# Importation des modules necessaire
+# Importation of modules
 
 import os
 import pygame
@@ -39,7 +39,7 @@ Pyg.initpygame()   # Appel de la fonction pygame to check if tt est OK
 Pyg.load_map() 
 Pyg.display_map()
 
-Pyg.boucle()    # Boucle which is une methode de la classe Pyg
+Pyg.loop()    # Boucle which is une methode de la classe Pyg
 
 
 
