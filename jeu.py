@@ -35,9 +35,8 @@ Map.load_cart() # Chargement de la map depuis la classe Map
 
 
 Map.initpygame()   # Appel de la fonction pygame to check if tt est OK
-Map.load_cart() 
 Map.display_map()
-Map.loop()    # Boucle which is une methode de la classe Pyg
+Map.loop()    
 
 
 

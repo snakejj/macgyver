@@ -77,6 +77,14 @@ class Map:
     def loop():
         #Boucle infinie pour laisser la fenetre ouverte
         continuer = 1
+        
+        pos_x = 0
+        pos_y = 0
+        
+        Map.load_cart() # Chargement de la map depuis la classe Map
+        carte = Map.load_cart()
+
+        
 
         while continuer:
             for event in pygame.event.get(): #On parcours la liste de tt les event reçus
@@ -89,10 +97,16 @@ class Map:
         #Boucle pour afficher les murs, sols, macgyver et le gardien
         #------------------------------------------------------------
 
-        
+               
                 if event.type == KEYDOWN:
                     if event.key == K_DOWN:
-                        pass
+                       
+                        carte[pos_x][pos_y+1] = "M"
+                        carte[pos_x][pos_y-1] = "X"
+                        Map.display_map()
+                        print(carte[pos_x][pos_y])
+                        print(pos_y)
+
                     if event.key == K_UP:
                         pass
                     if event.key == K_LEFT:
