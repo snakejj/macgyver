@@ -1,18 +1,24 @@
 # -*-coding:utf-8 -*
 
-from classes.map import Map
+import pygame
+
+from pygame.locals import *
+
 
 class Mac:
     """
     Docstring de la classe
     """
 
-    pos_x = 0
-    pos_y = 0
-    position = [pos_x,pos_y]
+    
+    
 
     def __init__(self):
         pass
 
-    
-        
+    def mac_down(self, mac_y, mac_x):
+
+        mac_y += 20
+        print(mac_y)   
+
+        return mac_y

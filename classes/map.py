@@ -3,6 +3,9 @@
 import pygame
 
 from pygame.locals import *
+from classes.mac import Mac
+
+mac = Mac()
 
 class Map:
     """
@@ -12,8 +15,8 @@ class Map:
     def __init__(self):
         pass
     
-    @staticmethod
-    def load_cart():
+
+    def load_cart(self):
         with open("map.txt", "r") as fichier_carte :    #Ouverture du fichier map.txt dans var fichier_carte         
             carte = []
             for line in fichier_carte:  
@@ -26,26 +29,11 @@ class Map:
                     carte.append(carte_l)     
         return carte
 
-    @staticmethod
-    def initpygame():
 
-        check = pygame.init()
-        if check[1] != 0:
-            print("""
+        
 
-            Erreur lors du chargement de PyGame
-
-            """)
-
-        else:
-            print("""
-
-            Chargement de PyGame : OK
-
-            """)    
-
-    @staticmethod
-    def display_map():
+    
+    def display_map(self):
         
         
                
@@ -56,8 +44,9 @@ class Map:
         mac = pygame.image.load("ressources/mac.png").convert_alpha() 
         grd = pygame.image.load("ressources/grd.png").convert_alpha() 
         
-        Map.load_cart() # Chargement de la map depuis la classe Map
-        carte = Map.load_cart()
+        # Chargement de la map depuis la classe Map
+        self.load_cart() # Chargement de la map depuis la classe Map
+        carte = self.load_cart()
 
         for l in range(15):
             for e in range(15):
@@ -72,27 +61,19 @@ class Map:
                 else  :
                     fenetre.blit(sol, (e*20,l*20))
 
-
-    @staticmethod
-    def loop():
+    
+    def loop(self):
         #Boucle infinie pour laisser la fenetre ouverte
         continuer = 1
-        
-        pos_x = 0
-        pos_y = 0
-        
-        Map.load_cart() # Chargement de la map depuis la classe Map
-        carte = Map.load_cart()
-
-        
+        mac_y = 0
+        mac_x = 0
 
         while continuer:
             for event in pygame.event.get(): #On parcours la liste de tt les event reçus
                 if event.type == QUIT:     #Si un de ces événements est de type QUIT
                     continuer = 0      #On arrête la boucle
 
-        #mise en place des deplacements de sorte a pouvoir switcher entre terminal et 
-        #pygame , c a d changer la map stocker en variable
+        
 
         #Boucle pour afficher les murs, sols, macgyver et le gardien
         #------------------------------------------------------------
@@ -100,13 +81,10 @@ class Map:
                
                 if event.type == KEYDOWN:
                     if event.key == K_DOWN:
-                       
-                        carte[pos_x][pos_y+1] = "M"
-                        carte[pos_x][pos_y-1] = "X"
-                        Map.display_map()
-                        print(carte[pos_x][pos_y])
-                        print(pos_y)
-
+                        if mac_y < 280 :
+                            mac_y = mac.mac_down(mac_y, mac_x)
+                        else:
+                            self.display_map()                            
                     if event.key == K_UP:
                         pass
                     if event.key == K_LEFT:
