@@ -13,15 +13,20 @@ import os
 import pygame
 from pygame.locals import *
 
-from random import randrange
+
 from classes.mac import Mac
 from classes.map import Map
+from classes.obj import Obj
 
 # ##############################################################################
 # Definition of fonctions and start variables
 
-mac = Mac()
+
 map = Map()
+map.load_cart()
+mac = Mac(map.maincart)
+obj = Obj(map.maincart)
+obj1_x, obj1_y, obj2_x, obj2_y, obj3_x, obj3_y = obj.random_obj()
 
 def initpygame():
 
@@ -41,7 +46,7 @@ def initpygame():
         """)
 
 
-def display_map(mac_x,mac_y):
+def display_map(mac_x,mac_y,obj1_x, obj1_y, obj2_x, obj2_y, obj3_x, obj3_y):
         
     fenetre = pygame.display.set_mode((300, 300)) #Taille pr 15 bloc de 20px
 
@@ -49,10 +54,15 @@ def display_map(mac_x,mac_y):
     murs = pygame.image.load("ressources/mur.jpg").convert() #Load walls
     macg = pygame.image.load("ressources/mac.png").convert_alpha() 
     grdn = pygame.image.load("ressources/grd.png").convert_alpha() 
-    
+    obj1 = pygame.image.load("ressources/ether.png").convert_alpha()
+    obj2 = pygame.image.load("ressources/coffre.png").convert_alpha()
+    obj3 = pygame.image.load("ressources/potion.png").convert_alpha()
+
+
+
     # Chargement de la map depuis la classe Map
-    map.load_cart() # Chargement de la map depuis la classe Map
     carte = map.load_cart()
+    
 
     
     
@@ -61,15 +71,21 @@ def display_map(mac_x,mac_y):
             fenetre.blit(murs, (e*20,l*20))
             
             if map.maincart[l][e] == "@" or map.maincart[l][e] == "M" :
-                mac.obstacle = True
+               
                 fenetre.blit(sols, (e*20,l*20))
+             
             elif map.maincart[l][e] == "G":
-                mac.obstacle = True
+               
                 fenetre.blit(sols, (e*20,l*20))
                 fenetre.blit(grdn, (e*20,l*20))
                 
     
     fenetre.blit(macg, (mac_x,mac_y))
+
+    
+    fenetre.blit(obj1, (obj1_y*20,obj1_x*20))
+    fenetre.blit(obj2, (obj2_y*20,obj2_x*20))
+    fenetre.blit(obj3, (obj3_y*20,obj3_x*20))
     
 def loop():
 
@@ -92,16 +108,20 @@ def loop():
             if event.type == KEYDOWN:
                 if event.key == K_DOWN:
                     mac_x, mac_y = mac.mac_down()
-                    display_map(mac_x,mac_y)    
+                    display_map(mac_x,mac_y,obj1_x, obj1_y, obj2_x, obj2_y, \
+                    obj3_x, obj3_y)    
                 if event.key == K_UP:
                     mac_x, mac_y = mac.mac_up()
-                    display_map(mac_x,mac_y)    
+                    display_map(mac_x,mac_y,obj1_x, obj1_y, obj2_x, obj2_y, \
+                    obj3_x, obj3_y)  
                 if event.key == K_LEFT:
                     mac_x, mac_y = mac.mac_left()
-                    display_map(mac_x,mac_y)    
+                    display_map(mac_x,mac_y,obj1_x, obj1_y, obj2_x, obj2_y, \
+                    obj3_x, obj3_y)  
                 if event.key == K_RIGHT:
                     mac_x, mac_y = mac.mac_right()
-                    display_map(mac_x,mac_y)    
+                    display_map(mac_x,mac_y,obj1_x, obj1_y, obj2_x, obj2_y, \
+                    obj3_x, obj3_y)    
 
 
         pygame.display.flip()       #Rafraichissement de l'affichage
@@ -112,7 +132,9 @@ def loop():
 
 initpygame()
 
-display_map(mac.mac_x,mac.mac_y)
+display_map(mac.mac_x,mac.mac_y,obj1_x, obj1_y, obj2_x, obj2_y, obj3_x, obj3_y)
+
+print(obj1_x, obj1_y, obj2_x, obj2_y, obj3_x, obj3_y)
 
 loop()    
 
