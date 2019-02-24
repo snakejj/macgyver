@@ -26,7 +26,9 @@ map = Map()
 map.load_cart()
 mac = Mac(map.maincart)
 obj = Obj(map.maincart)
-obj1_x, obj1_y, obj2_x, obj2_y, obj3_x, obj3_y = obj.random_obj()
+obj1_x, obj1_y = obj.random_obj()
+obj2_x, obj2_y = obj.random_obj()
+obj3_x, obj3_y = obj.random_obj()
 
 def initpygame():
 
@@ -46,7 +48,7 @@ def initpygame():
         """)
 
 
-def display_map(mac_x,mac_y,obj1_x, obj1_y, obj2_x, obj2_y, obj3_x, obj3_y):
+def display_map(mac,obj):
         
     fenetre = pygame.display.set_mode((300, 300)) #Taille pr 15 bloc de 20px
 
@@ -80,7 +82,7 @@ def display_map(mac_x,mac_y,obj1_x, obj1_y, obj2_x, obj2_y, obj3_x, obj3_y):
                 fenetre.blit(grdn, (e*20,l*20))
                 
     
-    fenetre.blit(macg, (mac_x,mac_y))
+    fenetre.blit(macg, (mac.mac_x,mac.mac_y))
 
     
     fenetre.blit(obj1, (obj1_y*20,obj1_x*20))
@@ -91,8 +93,6 @@ def loop():
 
     #Boucle infinie pour laisser la fenetre ouverte
     continuer = 1
-    mac_x = mac.mac_x
-    mac_y = mac.mac_y
 
     while continuer:
         for event in pygame.event.get(): #On parcours la liste de tt les event reçus
@@ -104,24 +104,20 @@ def loop():
     #Boucle pour afficher les murs, sols, macgyver et le gardien
     #------------------------------------------------------------
 
-           
+            
             if event.type == KEYDOWN:
                 if event.key == K_DOWN:
-                    mac_x, mac_y = mac.mac_down()
-                    display_map(mac_x,mac_y,obj1_x, obj1_y, obj2_x, obj2_y, \
-                    obj3_x, obj3_y)    
+                    mac.mac_down()
+                    display_map(mac,obj)    
                 if event.key == K_UP:
-                    mac_x, mac_y = mac.mac_up()
-                    display_map(mac_x,mac_y,obj1_x, obj1_y, obj2_x, obj2_y, \
-                    obj3_x, obj3_y)  
+                    mac.mac_up()
+                    display_map(mac,obj)   
                 if event.key == K_LEFT:
-                    mac_x, mac_y = mac.mac_left()
-                    display_map(mac_x,mac_y,obj1_x, obj1_y, obj2_x, obj2_y, \
-                    obj3_x, obj3_y)  
+                    mac.mac_left()
+                    display_map(mac,obj)  
                 if event.key == K_RIGHT:
-                    mac_x, mac_y = mac.mac_right()
-                    display_map(mac_x,mac_y,obj1_x, obj1_y, obj2_x, obj2_y, \
-                    obj3_x, obj3_y)    
+                    mac.mac_right()
+                    display_map(mac,obj)   
 
 
         pygame.display.flip()       #Rafraichissement de l'affichage
@@ -132,9 +128,8 @@ def loop():
 
 initpygame()
 
-display_map(mac.mac_x,mac.mac_y,obj1_x, obj1_y, obj2_x, obj2_y, obj3_x, obj3_y)
+display_map(mac,obj)
 
-print(obj1_x, obj1_y, obj2_x, obj2_y, obj3_x, obj3_y)
 
 loop()    
 
