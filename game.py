@@ -57,7 +57,7 @@ def initpygame():
 
 def display_map(mac,obj):
         
-    fenetre = pygame.display.set_mode((300, 300)) #Taille pr 15 bloc de 20px
+    fenetre = pygame.display.set_mode((300, 330)) #Taille pr 15 bloc de 20px
 
     sols = pygame.image.load("ressources/sol.jpg").convert() #Load background
     murs = pygame.image.load("ressources/mur.jpg").convert() #Load walls
@@ -77,24 +77,24 @@ def display_map(mac,obj):
     
     for l in range(15):
         for e in range(15):
-            fenetre.blit(murs, (e*20,l*20))
+            fenetre.blit(murs, (e*20,l*20+30))
             
             if map.maincart[l][e] == "@" or map.maincart[l][e] == "M" :
                
-                fenetre.blit(sols, (e*20,l*20))
+                fenetre.blit(sols, (e*20,l*20+30))
              
             elif map.maincart[l][e] == "G":
                
-                fenetre.blit(sols, (e*20,l*20))
-                fenetre.blit(grdn, (e*20,l*20))
+                fenetre.blit(sols, (e*20,l*20+30))
+                fenetre.blit(grdn, (e*20,l*20+30))
                 
     
-    fenetre.blit(macg, (mac.mac_x,mac.mac_y))
+    fenetre.blit(macg, (mac.mac_x,mac.mac_y+30))
 
     
-    fenetre.blit(obj1, (obj1_y*20,obj1_x*20))
-    fenetre.blit(obj2, (obj2_y*20,obj2_x*20))
-    fenetre.blit(obj3, (obj3_y*20,obj3_x*20))
+    fenetre.blit(obj1, (obj1_y*20,obj1_x*20+30))
+    fenetre.blit(obj2, (obj2_y*20,obj2_x*20+30))
+    fenetre.blit(obj3, (obj3_y*20,obj3_x*20+30))
     
 def loop():
 
@@ -115,16 +115,28 @@ def loop():
             if event.type == KEYDOWN:
                 if event.key == K_DOWN:
                     mac.mac_down()
-                    display_map(mac,obj)    
+                    if mac.front_g == True :
+                        print("you win")
+                    else:
+                        display_map(mac,obj)   
                 if event.key == K_UP:
                     mac.mac_up()
-                    display_map(mac,obj)   
+                    if mac.front_g == True :
+                        print("you win")
+                    else:
+                        display_map(mac,obj)   
                 if event.key == K_LEFT:
                     mac.mac_left()
-                    display_map(mac,obj)  
+                    if mac.front_g == True :
+                        print("you win")
+                    else:
+                        display_map(mac,obj)  
                 if event.key == K_RIGHT:
                     mac.mac_right()
-                    display_map(mac,obj)   
+                    if mac.front_g == True :
+                        print("you win")
+                    else:
+                        display_map(mac,obj)   
 
 
         pygame.display.flip()       #Rafraichissement de l'affichage
