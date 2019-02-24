@@ -26,9 +26,16 @@ map = Map()
 map.load_cart()
 mac = Mac(map.maincart)
 obj = Obj(map.maincart)
+
 obj1_x, obj1_y = obj.random_obj()
 obj2_x, obj2_y = obj.random_obj()
+while map.maincart[obj2_x][obj2_y] != map.maincart[obj1_x][obj1_y]:
+    obj2_x, obj2_y = obj.random_obj()
+
 obj3_x, obj3_y = obj.random_obj()
+while map.maincart[obj3_x][obj3_y] != map.maincart[obj2_x][obj2_y]\
+and map.maincart[obj3_x][obj3_y] != map.maincart[obj1_x][obj1_y] :
+    obj2_x, obj2_y = obj.random_obj()
 
 def initpygame():
 
