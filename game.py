@@ -64,8 +64,8 @@ def display_map(mac,obj):
     macg = pygame.image.load("ressources/mac.png").convert_alpha() 
     grdn = pygame.image.load("ressources/grd.png").convert_alpha() 
     obj1 = pygame.image.load("ressources/ether.png").convert_alpha()
-    obj2 = pygame.image.load("ressources/coffre.png").convert_alpha()
-    obj3 = pygame.image.load("ressources/potion.png").convert_alpha()
+    obj2 = pygame.image.load("ressources/syringe.png").convert_alpha()
+    obj3 = pygame.image.load("ressources/tube.png").convert_alpha()
 
 
 
