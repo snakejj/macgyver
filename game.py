@@ -27,12 +27,20 @@ map.load_cart()
 mac = Mac(map.maincart)
 obj = Obj(map.maincart)
 
-obj1pick = False
-obj2pick = False
-obj3pick = False
+obj1 = Obj(map.maincart)
+obj2 = Obj(map.maincart)
+obj3 = Obj(map.maincart)
+
+
+obj1.random_obj()
+obj2.random_obj()
+obj3.random_obj()
+
+
 win = False
 los = False
 
+"""
 obj1_x, obj1_y = obj.random_obj()
 obj2_x, obj2_y = obj.random_obj()
 while map.maincart[obj2_x][obj2_y] != map.maincart[obj1_x][obj1_y]:
@@ -42,7 +50,7 @@ obj3_x, obj3_y = obj.random_obj()
 while map.maincart[obj3_x][obj3_y] != map.maincart[obj2_x][obj2_y]\
 and map.maincart[obj3_x][obj3_y] != map.maincart[obj1_x][obj1_y] :
     obj2_x, obj2_y = obj.random_obj()
-
+"""
 def initpygame():
 
     check = pygame.init()
@@ -62,6 +70,8 @@ def initpygame():
 
 
 def display_map(mac,obj):
+
+    
         
     window = pygame.display.set_mode((300, 330)) #Size of 15 blocs of 20px each
 
@@ -100,19 +110,19 @@ def display_map(mac,obj):
     window.blit(macg, (mac.mac_x,mac.mac_y+30))
     window.blit(topb, (0,0))
 
-    if obj1pick == False :
-        window.blit(obj1, (obj1_y*20,obj1_x*20+30))
+    if obj1.objpick == False :
+        window.blit(obj1, (obj1.obj_y*20,obj1.obj_x*20+30))
     else:
         window.blit(obj1, (240,5))
 
 
-    if obj2pick == False :
-        window.blit(obj2, (obj2_y*20,obj2_x*20+30))
+    if obj2.objpick == False :
+        window.blit(obj2, (obj2.obj_y*20,obj2.obj_x*20+30))
     else:
         window.blit(obj2, (260,5))
      
-    if obj3pick == False :
-        window.blit(obj3, (obj3_y*20,obj3_x*20+30))
+    if obj3.objpick == False :
+        window.blit(obj3, (obj3.obj_y*20,obj3.obj_x*20+30))
     else:
         window.blit(obj3, (280,5))
     
@@ -129,6 +139,8 @@ def loop():
     #Infinite loop to let the window open
     continuer = 1
 
+
+
     while continuer:
         for event in pygame.event.get():  
             if event.type == QUIT:      
@@ -142,54 +154,56 @@ def loop():
             
             if event.type == KEYDOWN:
                 if event.key == K_DOWN:
-                    mac.mac_down()
-                    pick_obj(1,0)
-                    winlose()
-                    display_map(mac,obj)   
+                    mac.mac_down() 
+                    print(obj1pick,obj2pick,obj2pick)
                 if event.key == K_UP:
-                    mac.mac_up()
-                    pick_obj(-1,0)
-                    winlose()
-                    display_map(mac,obj)    
+                    mac.mac_up()  
+                    print(obj1pick,obj2pick,obj2pick)
                 if event.key == K_LEFT:
                     mac.mac_left()
-                    pick_obj(0,-1)
-                    winlose()
-                    display_map(mac,obj) 
+                    print(obj1pick,obj2pick,obj2pick)
                 if event.key == K_RIGHT:
-                    mac.mac_right()
-                    pick_obj(0,1)
-                    winlose()
-                    display_map(mac,obj) 
-
-
+                    mac.mac_right() 
+                    print(obj1pick,obj2pick,obj2pick)
+        pick_obj()
+        display_map(mac,obj)  
+        
         pygame.display.flip()       #Display refresh
 
 
 
-def pick_obj(plusorminusy,plusorminusx):
+def pick_obj():
 
-    if map.maincart[int(mac.mac_y /20-1+plusorminusy)]\
-    [int(mac.mac_x / 20+plusorminusx)] == map.maincart\
-    [int(obj1_y /20+plusorminusy)][int(obj1_x / 20+plusorminusx)] :
+    global obj1, obj2, obj3
+
+    if map.maincart[int(mac.mac_y /20)]\
+    [int(mac.mac_x / 20)] == map.maincart\
+    [int(obj1_y /20)][int(obj1_x / 20)] :
         
         obj.objcounter += 1
-        obj1pick = True
+        obj1.objpick = True
+        print(map.maincart[int(mac.mac_y /20)]\
+        [int(mac.mac_x / 20)])
+        print(map.maincart\
+        [int(obj1_y /20)][int(obj1_x / 20)])
+        
     
-    if map.maincart[int(mac.mac_y /20-1+plusorminusy)]\
-    [int(mac.mac_x / 20+plusorminusx)] == map.maincart\
-    [int(obj2_y /20+plusorminusy)][int(obj2_x / 20+plusorminusx)] :
+    if map.maincart[int(mac.mac_y /20)]\
+    [int(mac.mac_x / 20)] == map.maincart\
+    [int(obj2_y /20)][int(obj2_x / 20)] :
         
         obj.objcounter += 1
-        obj2pick = True
+        obj2.objpick = True
 
-    if map.maincart[int(mac.mac_y /20-1+plusorminusy)]\
-    [int(mac.mac_x / 20+plusorminusx)] == map.maincart\
-    [int(obj3_y /20+plusorminusy)][int(obj3_x / 20+plusorminusx)] :
+
+    if map.maincart[int(mac.mac_y /20)]\
+    [int(mac.mac_x / 20)] == map.maincart\
+    [int(obj3_y /20)][int(obj3_x / 20)] :
         
         obj.objcounter += 1
-        obj3pick = True
+        obj3.objpick = True
 
+        
 def winlose():
 
     if mac.front_g == True and obj.objcounter == 3 :

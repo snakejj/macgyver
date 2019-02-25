@@ -16,6 +16,7 @@ class Obj:
         self.obj_y = int() 
         self.objcounter = 0
         self.maze = maze
+        self.objpick = False
 
     def random_obj(self):
         
