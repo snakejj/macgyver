@@ -7,13 +7,14 @@ from classes.mac import Mac
 
 class Obj:
     """
-    Docstring de la classe
+    Obj class Docstring
     """
 
     
     def __init__(self,maze):
         self.obj_x = int() 
         self.obj_y = int() 
+        self.objcounter = 0
         self.maze = maze
 
     def random_obj(self):

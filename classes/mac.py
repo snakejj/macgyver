@@ -7,7 +7,7 @@ map = Map()
 
 class Mac:
     """
-    Docstring de la classe
+    Class's docstring
     """
 
     
@@ -49,9 +49,6 @@ class Mac:
             return self.mac_x, self.mac_y
 
     def mac_right(self):
-        
-
-
         if self.mac_x < 280 and self.maze[int(self.mac_y /20)]\
         [int(self.mac_x / 20 + 1)] == "G" :
             self.front_g = True
@@ -67,8 +64,6 @@ class Mac:
             return self.mac_x, self.mac_y
 
     def mac_left(self):
-
-
         if self.mac_x > 0 and self.maze[int(self.mac_y /20)]\
            [int(self.mac_x / 20 - 1)] == "G" :
             self.front_g = True
