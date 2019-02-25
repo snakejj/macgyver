@@ -155,16 +155,13 @@ def loop():
             if event.type == KEYDOWN:
                 if event.key == K_DOWN:
                     mac.mac_down() 
-                    print(obj1pick,obj2pick,obj2pick)
+                    
                 if event.key == K_UP:
                     mac.mac_up()  
-                    print(obj1pick,obj2pick,obj2pick)
                 if event.key == K_LEFT:
                     mac.mac_left()
-                    print(obj1pick,obj2pick,obj2pick)
                 if event.key == K_RIGHT:
                     mac.mac_right() 
-                    print(obj1pick,obj2pick,obj2pick)
         pick_obj()
         display_map(mac,obj)  
         
@@ -178,19 +175,16 @@ def pick_obj():
 
     if map.maincart[int(mac.mac_y /20)]\
     [int(mac.mac_x / 20)] == map.maincart\
-    [int(obj1_y /20)][int(obj1_x / 20)] :
+    [int(obj1.obj_y /20)][int(obj1.obj_x / 20)] :
         
         obj.objcounter += 1
         obj1.objpick = True
-        print(map.maincart[int(mac.mac_y /20)]\
-        [int(mac.mac_x / 20)])
-        print(map.maincart\
-        [int(obj1_y /20)][int(obj1_x / 20)])
+       
         
     
     if map.maincart[int(mac.mac_y /20)]\
     [int(mac.mac_x / 20)] == map.maincart\
-    [int(obj2_y /20)][int(obj2_x / 20)] :
+    [int(obj2.obj_y /20)][int(obj2.obj_x / 20)] :
         
         obj.objcounter += 1
         obj2.objpick = True
@@ -198,7 +192,7 @@ def pick_obj():
 
     if map.maincart[int(mac.mac_y /20)]\
     [int(mac.mac_x / 20)] == map.maincart\
-    [int(obj3_y /20)][int(obj3_x / 20)] :
+    [int(obj3.obj_y /20)][int(obj3.obj_x / 20)] :
         
         obj.objcounter += 1
         obj3.objpick = True
