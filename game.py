@@ -24,17 +24,24 @@ from classes.obj import Obj
 
 map = Map()
 map.load_cart()
+
 mac = Mac(map.maincart)
+
 obj = Obj(map.maincart)
 
-obj1 = Obj(map.maincart)
-obj2 = Obj(map.maincart)
-obj3 = Obj(map.maincart)
+obj_1 = Obj(map.maincart)
+obj_1.random_obj()
+
+obj_2 = Obj(map.maincart)
+obj_2.random_obj()
 
 
-obj1.random_obj()
-obj2.random_obj()
-obj3.random_obj()
+obj_3 = Obj(map.maincart)
+obj_3.random_obj()
+
+
+
+
 
 
 win = False
@@ -110,19 +117,19 @@ def display_map(mac,obj):
     window.blit(macg, (mac.mac_x,mac.mac_y+30))
     window.blit(topb, (0,0))
 
-    if obj1.objpick == False :
-        window.blit(obj1, (obj1.obj_y*20,obj1.obj_x*20+30))
+    if obj_1.objpick == False :
+        window.blit(obj1, (obj_1.obj_y*20,obj_1.obj_x*20+30))
     else:
         window.blit(obj1, (240,5))
 
 
-    if obj2.objpick == False :
-        window.blit(obj2, (obj2.obj_y*20,obj2.obj_x*20+30))
+    if obj_2.objpick == False :
+        window.blit(obj2, (obj_2.obj_y*20,obj_2.obj_x*20+30))
     else:
         window.blit(obj2, (260,5))
      
-    if obj3.objpick == False :
-        window.blit(obj3, (obj3.obj_y*20,obj3.obj_x*20+30))
+    if obj_3.objpick == False :
+        window.blit(obj3, (obj_3.obj_y*20,obj_3.obj_x*20+30))
     else:
         window.blit(obj3, (280,5))
     
@@ -138,7 +145,7 @@ def loop():
 
     #Infinite loop to let the window open
     continuer = 1
-
+    
 
 
     while continuer:
@@ -155,15 +162,26 @@ def loop():
             if event.type == KEYDOWN:
                 if event.key == K_DOWN:
                     mac.mac_down() 
-                    
+                    pick_obj()
+                    display_map(mac,obj)  
+                    print(obj.objcounter)
                 if event.key == K_UP:
                     mac.mac_up()  
+                    pick_obj()
+                    display_map(mac,obj)  
+                    print(obj.objcounter)
                 if event.key == K_LEFT:
                     mac.mac_left()
+                    pick_obj()
+                    display_map(mac,obj)  
+                    print(obj.objcounter)
                 if event.key == K_RIGHT:
                     mac.mac_right() 
-        pick_obj()
-        display_map(mac,obj)  
+                    pick_obj()
+                    display_map(mac,obj)  
+                    print(obj.objcounter)
+            
+            
         
         pygame.display.flip()       #Display refresh
 
@@ -171,31 +189,31 @@ def loop():
 
 def pick_obj():
 
-    global obj1, obj2, obj3
+    
 
     if map.maincart[int(mac.mac_y /20)]\
     [int(mac.mac_x / 20)] == map.maincart\
-    [int(obj1.obj_y /20)][int(obj1.obj_x / 20)] :
+    [int(obj_1.obj_y /20)][int(obj_1.obj_x / 20)] :
         
         obj.objcounter += 1
-        obj1.objpick = True
-       
+        obj_1.objpick = True
+        print("test")
         
     
     if map.maincart[int(mac.mac_y /20)]\
     [int(mac.mac_x / 20)] == map.maincart\
-    [int(obj2.obj_y /20)][int(obj2.obj_x / 20)] :
+    [int(obj_2.obj_y /20)][int(obj_2.obj_x / 20)] :
         
         obj.objcounter += 1
-        obj2.objpick = True
+        obj_2.objpick = True
 
 
     if map.maincart[int(mac.mac_y /20)]\
     [int(mac.mac_x / 20)] == map.maincart\
-    [int(obj3.obj_y /20)][int(obj3.obj_x / 20)] :
+    [int(obj_3.obj_y /20)][int(obj_3.obj_x / 20)] :
         
         obj.objcounter += 1
-        obj3.objpick = True
+        obj_3.objpick = True
 
         
 def winlose():
