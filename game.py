@@ -193,7 +193,7 @@ def pick_obj():
 
     if map.maincart[int(mac.mac_y /20)]\
     [int(mac.mac_x / 20)] == map.maincart\
-    [int(obj_1.obj_y /20)][int(obj_1.obj_x / 20)] :
+    [int(obj_1.obj_y)][int(obj_1.obj_x )] :
         
         obj.objcounter += 1
         obj_1.objpick = True
@@ -202,7 +202,7 @@ def pick_obj():
     
     if map.maincart[int(mac.mac_y /20)]\
     [int(mac.mac_x / 20)] == map.maincart\
-    [int(obj_2.obj_y /20)][int(obj_2.obj_x / 20)] :
+    [int(obj_2.obj_y)][int(obj_2.obj_x)] :
         
         obj.objcounter += 1
         obj_2.objpick = True
@@ -210,7 +210,7 @@ def pick_obj():
 
     if map.maincart[int(mac.mac_y /20)]\
     [int(mac.mac_x / 20)] == map.maincart\
-    [int(obj_3.obj_y /20)][int(obj_3.obj_x / 20)] :
+    [int(obj_3.obj_y)][int(obj_3.obj_x )] :
         
         obj.objcounter += 1
         obj_3.objpick = True
