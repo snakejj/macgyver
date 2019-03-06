@@ -21,12 +21,12 @@ class Mac:
 
     def mac_down(self):
         
-        if self.mac_y < 280 and self.maze[int(self.mac_y /20+1)]\
-        [int(self.mac_x / 20)] == "G" :
+        if self.mac_y < 15 and self.maze[self.mac_y+1]\
+        [self.mac_x] == "G" :
             self.front_g = True    
-        elif self.mac_y < 280 and self.maze[int(self.mac_y /20+1)]\
-        [int(self.mac_x / 20)] == "@" :
-            self.mac_y += 20
+        elif self.mac_y < 15 and self.maze[self.mac_y+1]\
+        [self.mac_x] == "@" :
+            self.mac_y += 1
             print("mac_y =",self.mac_y)
             return self.mac_x, self.mac_y       
         else:
@@ -35,13 +35,13 @@ class Mac:
 
     def mac_up(self):
 
-        if self.mac_y > 0 and self.maze[int(self.mac_y /20-1)]\
-        [int(self.mac_x / 20)] == "G":
+        if self.mac_y > 0 and self.maze[self.mac_y-1]\
+        [self.mac_x] == "G":
             self.front_g = True
-        elif self.mac_y > 0 and self.maze[int(self.mac_y /20-1)]\
-        [int(self.mac_x / 20)] == "@" or self.maze[int(self.mac_y /20-1)]\
-        [int(self.mac_x / 20)] == "M" :
-            self.mac_y -= 20
+        elif self.mac_y > 0 and self.maze[self.mac_y-1]\
+        [self.mac_x] == "@" or self.maze[self.mac_y-1]\
+        [self.mac_x] == "M" :
+            self.mac_y -= 1
             print("mac_y =", self.mac_y)
             return self.mac_x, self.mac_y
         else:
@@ -49,13 +49,13 @@ class Mac:
             return self.mac_x, self.mac_y
 
     def mac_right(self):
-        if self.mac_x < 280 and self.maze[int(self.mac_y /20)]\
-        [int(self.mac_x / 20 + 1)] == "G" :
+        if self.mac_x < 15 and self.maze[self.mac_y]\
+        [self.mac_x + 1] == "G" :
             self.front_g = True
 
-        elif self.mac_x < 280 and self.maze[int(self.mac_y /20)]\
-        [int(self.mac_x / 20 + 1)] == "@" :
-            self.mac_x += 20
+        elif self.mac_x < 15 and self.maze[self.mac_y]\
+        [self.mac_x + 1] == "@" :
+            self.mac_x += 1
             print("mac_x =",self.mac_x)
             return self.mac_x, self.mac_y
         
@@ -64,13 +64,13 @@ class Mac:
             return self.mac_x, self.mac_y
 
     def mac_left(self):
-        if self.mac_x > 0 and self.maze[int(self.mac_y /20)]\
-           [int(self.mac_x / 20 - 1)] == "G" :
+        if self.mac_x > 0 and self.maze[self.mac_y]\
+           [self.mac_x - 1] == "G" :
             self.front_g = True
-        elif self.mac_x > 0 and self.maze[int(self.mac_y /20)]\
-        [int(self.mac_x / 20 - 1)] == "@" or self.maze[int(self.mac_y /20-1)]\
-        [int(self.mac_x / 20 - 1)] == "M" :
-            self.mac_x -= 20
+        elif self.mac_x > 0 and self.maze[self.mac_y]\
+        [self.mac_x - 1] == "@" or self.maze[self.mac_y -1]\
+        [self.mac_x - 1] == "M" :
+            self.mac_x -= 1
             print("mac_x =",self.mac_x)
             return self.mac_x, self.mac_y
         else:

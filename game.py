@@ -114,7 +114,7 @@ def display_map(mac,obj):
                 window.blit(grdn, (e*20,l*20+30))
                 
     
-    window.blit(macg, (mac.mac_x,mac.mac_y+30))
+    window.blit(macg, (mac.mac_x*20,mac.mac_y*20+30))
     window.blit(topb, (0,0))
 
     if obj_1.objpick == False :
@@ -191,26 +191,26 @@ def pick_obj():
 
     
 
-    if map.maincart[int(mac.mac_y /20)]\
-    [int(mac.mac_x / 20)] == map.maincart\
-    [int(obj_1.obj_y)][int(obj_1.obj_x )] :
+    if map.maincart[mac.mac_y]\
+    [mac.mac_x] == map.maincart\
+    [obj_1.obj_y][obj_1.obj_x] :
         
         obj.objcounter += 1
         obj_1.objpick = True
         print("test")
         
     
-    if map.maincart[int(mac.mac_y /20)]\
-    [int(mac.mac_x / 20)] == map.maincart\
-    [int(obj_2.obj_y)][int(obj_2.obj_x)] :
+    if map.maincart[mac.mac_y]\
+    [mac.mac_x] == map.maincart\
+    [obj_2.obj_y][obj_2.obj_x] :
         
         obj.objcounter += 1
         obj_2.objpick = True
 
 
-    if map.maincart[int(mac.mac_y /20)]\
-    [int(mac.mac_x / 20)] == map.maincart\
-    [int(obj_3.obj_y)][int(obj_3.obj_x )] :
+    if map.maincart[mac.mac_y]\
+    [mac.mac_x] == map.maincart\
+    [obj_3.obj_y][obj_3.obj_x] :
         
         obj.objcounter += 1
         obj_3.objpick = True
