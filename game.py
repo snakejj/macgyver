@@ -27,7 +27,7 @@ map.load_cart()
 
 mac = Mac(map.maincart)
 
-obj = Obj(map.maincart)
+objcounter = 0
 
 obj_1 = Obj(map.maincart)
 obj_1.random_obj()
@@ -47,17 +47,17 @@ obj_3.random_obj()
 win = False
 los = False
 
-"""
-obj1_x, obj1_y = obj.random_obj()
-obj2_x, obj2_y = obj.random_obj()
-while map.maincart[obj2_x][obj2_y] != map.maincart[obj1_x][obj1_y]:
-    obj2_x, obj2_y = obj.random_obj()
 
-obj3_x, obj3_y = obj.random_obj()
-while map.maincart[obj3_x][obj3_y] != map.maincart[obj2_x][obj2_y]\
-and map.maincart[obj3_x][obj3_y] != map.maincart[obj1_x][obj1_y] :
-    obj2_x, obj2_y = obj.random_obj()
-"""
+
+while obj_2.obj_x == obj_1.obj_x and obj_2.obj_y == obj_1.obj_y :
+    obj_2.random_obj()
+
+
+while obj_3.obj_x == obj_2.obj_x and obj_3.obj_y == obj_2.obj_y \
+or obj_3.obj_x == obj_1.obj_x and obj_3.obj_y == obj_1.obj_y :
+    obj_3.random_obj()
+
+
 def initpygame():
 
     check = pygame.init()
@@ -76,7 +76,7 @@ def initpygame():
         """)
 
 
-def display_map(mac,obj):
+def display_map(mac):
 
     
         
@@ -162,65 +162,53 @@ def loop():
             if event.type == KEYDOWN:
                 if event.key == K_DOWN:
                     mac.mac_down() 
-                    pick_obj()
-                    display_map(mac,obj)  
-                    print(obj.objcounter)
+                    print(objcounter)
                 if event.key == K_UP:
-                    mac.mac_up()  
-                    pick_obj()
-                    display_map(mac,obj)  
-                    print(obj.objcounter)
+                    mac.mac_up() 
+                    print(objcounter)
                 if event.key == K_LEFT:
-                    mac.mac_left()
-                    pick_obj()
-                    display_map(mac,obj)  
-                    print(obj.objcounter)
+                    mac.mac_left() 
+                    print(objcounter)
                 if event.key == K_RIGHT:
                     mac.mac_right() 
-                    pick_obj()
-                    display_map(mac,obj)  
-                    print(obj.objcounter)
+                    print(objcounter, mac.front_g)
             
             
-        
+                pick_obj()
+                winlose()
+                display_map(mac)
+                
         pygame.display.flip()       #Display refresh
 
 
 
 def pick_obj():
 
-    
+    global objcounter
 
-    if map.maincart[mac.mac_y]\
-    [mac.mac_x] == map.maincart\
-    [obj_1.obj_y][obj_1.obj_x] :
-        
-        obj.objcounter += 1
+    if mac.mac_x == obj_1.obj_y and mac.mac_y == obj_1.obj_x :
+        objcounter += 1
         obj_1.objpick = True
         print("test")
         
     
-    if map.maincart[mac.mac_y]\
-    [mac.mac_x] == map.maincart\
-    [obj_2.obj_y][obj_2.obj_x] :
-        
-        obj.objcounter += 1
+    if mac.mac_x == obj_2.obj_y and mac.mac_y == obj_2.obj_x :
+        objcounter += 1
         obj_2.objpick = True
 
 
-    if map.maincart[mac.mac_y]\
-    [mac.mac_x] == map.maincart\
-    [obj_3.obj_y][obj_3.obj_x] :
-        
-        obj.objcounter += 1
+    if mac.mac_x == obj_3.obj_y and mac.mac_y == obj_3.obj_x :
+        objcounter += 1
         obj_3.objpick = True
 
         
 def winlose():
 
-    if mac.front_g == True and obj.objcounter == 3 :
+    global win, los
+
+    if mac.front_g == True and objcounter == 3 :
         win = True
-    elif mac.front_g == True and obj.objcounter < 3 :
+    elif mac.front_g == True and objcounter < 3 :
         los = True
 
 
@@ -229,7 +217,7 @@ def winlose():
 
 initpygame()
 
-display_map(mac,obj)
+display_map(mac)
 
 loop()    
 

@@ -21,10 +21,10 @@ class Mac:
 
     def mac_down(self):
         
-        if self.mac_y < 15 and self.maze[self.mac_y+1]\
+        if self.mac_y < 14 and self.maze[self.mac_y+1]\
         [self.mac_x] == "G" :
             self.front_g = True    
-        elif self.mac_y < 15 and self.maze[self.mac_y+1]\
+        elif self.mac_y < 14 and self.maze[self.mac_y+1]\
         [self.mac_x] == "@" :
             self.mac_y += 1
             print("mac_y =",self.mac_y)
@@ -49,11 +49,11 @@ class Mac:
             return self.mac_x, self.mac_y
 
     def mac_right(self):
-        if self.mac_x < 15 and self.maze[self.mac_y]\
+        if self.mac_x < 14 and self.maze[self.mac_y]\
         [self.mac_x + 1] == "G" :
             self.front_g = True
 
-        elif self.mac_x < 15 and self.maze[self.mac_y]\
+        elif self.mac_x < 14 and self.maze[self.mac_y]\
         [self.mac_x + 1] == "@" :
             self.mac_x += 1
             print("mac_x =",self.mac_x)
