@@ -168,7 +168,7 @@ restart = False
 endgame = False
 initpygame()
 
-while not restart and not endgame:
+while restart is False and endgame is False:
     mapy = Map()
     mapy.load_cart()
 
