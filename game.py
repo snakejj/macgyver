@@ -48,7 +48,8 @@ def initpygame():
 
 
 def display_map(macinstance):
-    window = pygame.display.set_mode((300, 330))  # Size of 15 blocs of 20px each
+    # Size of 15 blocs of 20px each
+    window = pygame.display.set_mode((300, 330))
 
     floors = pygame.image.load("resources/floor.jpg").convert()
     walls = pygame.image.load("resources/wall.jpg").convert()
@@ -102,11 +103,12 @@ def display_map(macinstance):
 
 
 def loop():
+    global restart, endgame
+
     # Infinite loop to let the window open
     tocontinue = 1
-
     pygame.display.flip()
-    global restart, endgame
+    
     while tocontinue:
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -114,8 +116,6 @@ def loop():
                 endgame = True
 
             # loop to display the walls, floors, macgyver and the guardian
-            # ------------------------------------------------------------
-
             if event.type == KEYDOWN:
                 if event.key == K_DOWN:
                     mac.mac_down()
@@ -132,6 +132,7 @@ def loop():
                 pick_obj()
                 winlose()
                 display_map(mac)
+
         pygame.display.flip()  # Display refresh
     return restart, endgame
 
@@ -160,39 +161,38 @@ def winlose():
     elif mac.front_g and objcounter < 3:
         los = True
 
-
 # ##############################################################################
-
+# Definition of start variables
 
 restart = False
 endgame = False
+
+# ##############################################################################
+# ************************************GAME**************************************
+
 initpygame()
 
 while restart is False and endgame is False:
+    objcounter = 0
+    win = False
+    los = False    
+
     mapy = Map()
     mapy.load_cart()
 
     mac = Mac(mapy.maincart)
 
-    objcounter = 0
-
     obj_1 = Obj(mapy.maincart)
     obj_1.random_obj()
-
     obj_2 = Obj(mapy.maincart)
     obj_2.random_obj()
-
     obj_3 = Obj(mapy.maincart)
     obj_3.random_obj()
-
-    win = False
-    los = False
-
     nonsup()
 
     display_map(mac)
 
     loop()
-
     restart = False
+
     continue
