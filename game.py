@@ -123,13 +123,13 @@ def loop():
     #Infinite loop to let the window open
     tocontinue = 1
     
-    global restart
-
+    pygame.display.flip()
+    global restart,endgame
     while tocontinue:
         for event in pygame.event.get():  
             if event.type == QUIT:      
                 tocontinue = 0       
-
+                endgame = True
     
 
     #loop to display the walls, floors, macgyver and the guardian
@@ -156,9 +156,9 @@ def loop():
                 display_map(mac)
                 if event.key == K_SPACE :
                     restart = True 
-                
+                    tocontinue = 0
         pygame.display.flip()       #Display refresh
-    return restart
+    return restart, endgame
 
 
 def pick_obj():
@@ -190,7 +190,20 @@ def winlose():
     elif mac.front_g == True and objcounter < 3 :
         los = True
 
+'''
 def game():
+    global map,mac,objcounter,obj_1,obj_2,obj_3,win,los,restart
+'''        
+    
+
+# ##############################################################################
+
+
+restart = False
+endgame = False
+
+while restart == False and endgame == False :
+
     map = Map()
     map.load_cart()
 
@@ -224,14 +237,11 @@ def game():
 
     display_map(mac)
 
-    loop()    
-    
+    loop()
 
-# ##############################################################################
+    restart =False
+    continue
 
-
-restart = False
-game()
 
 
 
