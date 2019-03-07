@@ -22,40 +22,17 @@ from classes.obj import Obj
 # Definition of fonctions and start variables
 
 
-map = Map()
-map.load_cart()
 
-mac = Mac(map.maincart)
+def nonsup():
 
-objcounter = 0
-
-obj_1 = Obj(map.maincart)
-obj_1.random_obj()
-
-obj_2 = Obj(map.maincart)
-obj_2.random_obj()
+    while obj_2.obj_x == obj_1.obj_x and obj_2.obj_y == obj_1.obj_y :
+        obj_2.random_obj()
 
 
-obj_3 = Obj(map.maincart)
-obj_3.random_obj()
-
-
-
-
-
-
-win = False
-los = False
-
-
-
-while obj_2.obj_x == obj_1.obj_x and obj_2.obj_y == obj_1.obj_y :
-    obj_2.random_obj()
-
-
-while obj_3.obj_x == obj_2.obj_x and obj_3.obj_y == obj_2.obj_y \
-or obj_3.obj_x == obj_1.obj_x and obj_3.obj_y == obj_1.obj_y :
-    obj_3.random_obj()
+    while obj_3.obj_x == obj_2.obj_x and obj_3.obj_y == obj_2.obj_y \
+    or obj_3.obj_x == obj_1.obj_x and obj_3.obj_y == obj_1.obj_y :
+        obj_3.random_obj()
+    
 
 
 def initpygame():
@@ -144,14 +121,14 @@ def display_map(mac):
 def loop():
 
     #Infinite loop to let the window open
-    continuer = 1
+    tocontinue = 1
     
+    global restart
 
-
-    while continuer:
+    while tocontinue:
         for event in pygame.event.get():  
             if event.type == QUIT:      
-                continuer = 0       
+                tocontinue = 0       
 
     
 
@@ -171,15 +148,17 @@ def loop():
                     print(objcounter)
                 if event.key == K_RIGHT:
                     mac.mac_right() 
-                    print(objcounter, mac.front_g)
-            
+                    print(objcounter)
+                
             
                 pick_obj()
                 winlose()
                 display_map(mac)
+                if event.key == K_SPACE :
+                    restart = True 
                 
         pygame.display.flip()       #Display refresh
-
+    return restart
 
 
 def pick_obj():
@@ -206,7 +185,7 @@ def winlose():
 
     global win, los
 
-    if mac.front_g == True and objcounter == 3 :
+    if mac.front_g == True and objcounter >= 3 :
         win = True
     elif mac.front_g == True and objcounter < 3 :
         los = True
@@ -215,10 +194,44 @@ def winlose():
 
 # ##############################################################################
 
+
+restart = False
+
+
+map = Map()
+map.load_cart()
+
+mac = Mac(map.maincart)
+
+objcounter = 0
+
+obj_1 = Obj(map.maincart)
+obj_1.random_obj()
+
+obj_2 = Obj(map.maincart)
+obj_2.random_obj()
+
+
+obj_3 = Obj(map.maincart)
+obj_3.random_obj()
+
+
+
+
+
+
+win = False
+los = False
+
+
+nonsup()
+
+
 initpygame()
 
 display_map(mac)
 
 loop()    
+
 
 
