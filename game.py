@@ -62,7 +62,7 @@ def display_map(macinstance):
     topb = pygame.image.load("resources/topbar.png").convert()
 
     # Loading map from the class Map
-    carte = mapy.load_cart()
+    mapy.load_cart()
 
     for l in range(15):
         for e in range(15):
@@ -189,8 +189,6 @@ while not restart and not endgame:
     los = False
 
     nonsup()
-
-    
 
     display_map(mac)
 

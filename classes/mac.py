@@ -27,7 +27,7 @@ class Mac:
         if self.mac_y > 0 and self.maze[self.mac_y - 1][self.mac_x] == "G":
             self.front_g = True
         elif self.mac_y > 0 and self.maze[self.mac_y - 1][self.mac_x] == "@" \
-        or self.maze[self.mac_y - 1][self.mac_x] == "M":
+                or self.maze[self.mac_y - 1][self.mac_x] == "M":
             self.mac_y -= 1
             return self.mac_x, self.mac_y
         else:
@@ -46,7 +46,7 @@ class Mac:
         if self.mac_x > 0 and self.maze[self.mac_y][self.mac_x - 1] == "G":
             self.front_g = True
         elif self.mac_x > 0 and self.maze[self.mac_y][self.mac_x - 1] == "@" \
-        or self.maze[self.mac_y - 1][self.mac_x - 1] == "M":
+                or self.maze[self.mac_y - 1][self.mac_x - 1] == "M":
             self.mac_x -= 1
             return self.mac_x, self.mac_y
         else:
