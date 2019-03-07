@@ -1,9 +1,5 @@
 # -*-coding:utf-8 -*
 
-import pygame
-
-from pygame.locals import *
-
 
 class Map:
     """
@@ -15,7 +11,7 @@ class Map:
 
     def load_cart(self):
         # opening map.txt in cart_file variable
-        with open("map.txt", "r") as cart_file:  
+        with open("map.txt", "r") as cart_file:
             cart = []
             for line in cart_file:
                 cart_l = []
