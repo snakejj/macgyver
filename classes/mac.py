@@ -27,10 +27,8 @@ class Mac:
         elif self.mac_y < 14 and self.maze[self.mac_y+1]\
         [self.mac_x] == "@" :
             self.mac_y += 1
-            print("mac_y =",self.mac_y)
             return self.mac_x, self.mac_y       
         else:
-            print("mac_y =",self.mac_y)
             return self.mac_x, self.mac_y
 
     def mac_up(self):
@@ -42,10 +40,8 @@ class Mac:
         [self.mac_x] == "@" or self.maze[self.mac_y-1]\
         [self.mac_x] == "M" :
             self.mac_y -= 1
-            print("mac_y =", self.mac_y)
             return self.mac_x, self.mac_y
         else:
-            print("mac_y =",self.mac_y)
             return self.mac_x, self.mac_y
 
     def mac_right(self):
@@ -56,11 +52,8 @@ class Mac:
         elif self.mac_x < 14 and self.maze[self.mac_y]\
         [self.mac_x + 1] == "@" :
             self.mac_x += 1
-            print("mac_x =",self.mac_x)
             return self.mac_x, self.mac_y
-        
         else:
-            print("mac_x =",self.mac_x)
             return self.mac_x, self.mac_y
 
     def mac_left(self):
@@ -71,9 +64,7 @@ class Mac:
         [self.mac_x - 1] == "@" or self.maze[self.mac_y -1]\
         [self.mac_x - 1] == "M" :
             self.mac_x -= 1
-            print("mac_x =",self.mac_x)
             return self.mac_x, self.mac_y
         else:
-            print("mac_x =",self.mac_x)
             return self.mac_x, self.mac_y
 
