@@ -190,48 +190,50 @@ def winlose():
     elif mac.front_g == True and objcounter < 3 :
         los = True
 
+def game():
+    map = Map()
+    map.load_cart()
 
+    mac = Mac(map.maincart)
+
+    objcounter = 0
+
+    obj_1 = Obj(map.maincart)
+    obj_1.random_obj()
+
+    obj_2 = Obj(map.maincart)
+    obj_2.random_obj()
+
+
+    obj_3 = Obj(map.maincart)
+    obj_3.random_obj()
+
+
+
+
+
+
+    win = False
+    los = False
+
+
+    nonsup()
+
+
+    initpygame()
+
+    display_map(mac)
+
+    loop()    
+    
 
 # ##############################################################################
 
 
 restart = False
+game()
 
 
-map = Map()
-map.load_cart()
-
-mac = Mac(map.maincart)
-
-objcounter = 0
-
-obj_1 = Obj(map.maincart)
-obj_1.random_obj()
-
-obj_2 = Obj(map.maincart)
-obj_2.random_obj()
-
-
-obj_3 = Obj(map.maincart)
-obj_3.random_obj()
-
-
-
-
-
-
-win = False
-los = False
-
-
-nonsup()
-
-
-initpygame()
-
-display_map(mac)
-
-loop()    
 
 
 
