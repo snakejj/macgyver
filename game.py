@@ -58,8 +58,8 @@ def display_map(macinstance):
     obj1 = pygame.image.load("resources/ether.png").convert_alpha()
     obj2 = pygame.image.load("resources/syringe.png").convert_alpha()
     obj3 = pygame.image.load("resources/tube.png").convert_alpha()
-    wini = pygame.image.load("resources/wini.png").convert_alpha()
-    losi = pygame.image.load("resources/losi.png").convert_alpha()
+    wini = pygame.image.load("resources/wini.png").convert()
+    losi = pygame.image.load("resources/losi.png").convert()
     topb = pygame.image.load("resources/topbar.png").convert()
 
     # Loading map from the class Map
@@ -97,9 +97,9 @@ def display_map(macinstance):
         window.blit(obj3, (280, 5))
 
     if win:
-        window.blit(wini, (0, 0))
+        window.blit(wini, (0, 30))
     if los:
-        window.blit(losi, (0, 0))
+        window.blit(losi, (0, 30))
 
 
 def loop():
