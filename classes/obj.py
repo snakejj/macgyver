@@ -11,7 +11,6 @@ class Obj:
     def __init__(self, maze):
         self.obj_x = int()
         self.obj_y = int()
-        self.objcounter = 0
         self.maze = maze
         self.objpick = False
 
