@@ -63,7 +63,7 @@ def display_map(macinstance):
     topb = pygame.image.load("resources/topbar.png").convert()
 
     # Loading map from the class Map
-    mapy.load_cart()
+    
 
     for l in range(15):
         for e in range(15):
