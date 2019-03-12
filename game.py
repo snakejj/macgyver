@@ -21,7 +21,7 @@ from classes.obj import Obj
 # Definition of functions and start variables
 
 
-def nonsup():
+def check_superposition():
     while obj_2.obj_x == obj_1.obj_x and obj_2.obj_y == obj_1.obj_y:
         obj_2.random_obj()
 
@@ -30,7 +30,7 @@ def nonsup():
         obj_3.random_obj()
 
 
-def initpygame():
+def init_pygame():
     check = pygame.init()
     if check[1] != 0:
         print("""
@@ -47,39 +47,10 @@ def initpygame():
         """)
 
 
-def display_map(macinstance):
-    # Size of 15 blocs of 20px each
-    window = pygame.display.set_mode((300, 330))
-
-    floors = pygame.image.load("resources/floor.jpg").convert()
-    walls = pygame.image.load("resources/wall.jpg").convert()
-    macg = pygame.image.load("resources/mac.png").convert_alpha()
-    grdn = pygame.image.load("resources/grd.png").convert_alpha()
+def display_obj():
     obj1 = pygame.image.load("resources/ether.png").convert_alpha()
     obj2 = pygame.image.load("resources/syringe.png").convert_alpha()
     obj3 = pygame.image.load("resources/tube.png").convert_alpha()
-    wini = pygame.image.load("resources/wini.png").convert()
-    losi = pygame.image.load("resources/losi.png").convert()
-    topb = pygame.image.load("resources/topbar.png").convert()
-
-    # Loading map from the class Map
-    
-
-    for l in range(15):
-        for e in range(15):
-            window.blit(walls, (e * 20, l * 20 + 30))
-
-            if mapy.maincart[l][e] == "@" or mapy.maincart[l][e] == "M":
-
-                window.blit(floors, (e * 20, l * 20 + 30))
-
-            elif mapy.maincart[l][e] == "G":
-
-                window.blit(floors, (e * 20, l * 20 + 30))
-                window.blit(grdn, (e * 20, l * 20 + 30))
-
-    window.blit(macg, (macinstance.mac_x * 20, macinstance.mac_y * 20 + 30))
-    window.blit(topb, (0, 0))
 
     if obj_1.objpick is False:
         window.blit(obj1, (obj_1.obj_y * 20, obj_1.obj_x * 20 + 30))
@@ -96,10 +67,50 @@ def display_map(macinstance):
     else:
         window.blit(obj3, (280, 5))
 
+def display_win_lose():
+    wini = pygame.image.load("resources/wini.png").convert()
+    losi = pygame.image.load("resources/losi.png").convert()
     if win:
         window.blit(wini, (0, 30))
     if los:
         window.blit(losi, (0, 30))
+
+
+def display_map(macinstance):
+    # Size of 15 blocs of 20px each
+    global window
+
+    window = pygame.display.set_mode((300, 330))
+    floors = pygame.image.load("resources/floor.jpg").convert()
+    walls = pygame.image.load("resources/wall.jpg").convert()
+    macg = pygame.image.load("resources/mac.png").convert_alpha()
+    grdn = pygame.image.load("resources/grd.png").convert_alpha()
+
+
+    topb = pygame.image.load("resources/topbar.png").convert()
+
+    # Loading map from the class Map
+    
+
+    for l in range(15):
+        for e in range(15):
+            window.blit(walls, (e * 20, l * 20 + 30))
+
+            if mapy.mainmap[l][e] == "@" or mapy.mainmap[l][e] == "M":
+
+                window.blit(floors, (e * 20, l * 20 + 30))
+
+            elif mapy.mainmap[l][e] == "G":
+
+                window.blit(floors, (e * 20, l * 20 + 30))
+                window.blit(grdn, (e * 20, l * 20 + 30))
+
+    window.blit(macg, (macinstance.mac_x * 20, macinstance.mac_y * 20 + 30))
+    window.blit(topb, (0, 0))
+
+    display_obj()
+    display_win_lose()
+
 
 
 def loop():
@@ -130,7 +141,7 @@ def loop():
                     tocontinue = 0
 
                 pick_obj()
-                winlose()
+                win_lose()
                 display_map(mac)
 
         pygame.display.flip()  # Display refresh
@@ -153,7 +164,7 @@ def pick_obj():
         obj_3.objpick = True
 
 
-def winlose():
+def win_lose():
     global win, los
 
     if mac.front_g and objcounter >= 3:
@@ -170,7 +181,7 @@ endgame = False
 # ##############################################################################
 # ************************************GAME**************************************
 
-initpygame()
+init_pygame()
 
 while restart is False and endgame is False:
     objcounter = 0
@@ -180,15 +191,15 @@ while restart is False and endgame is False:
     mapy = Map()
     mapy.load_cart()
 
-    mac = Mac(mapy.maincart)
+    mac = Mac(mapy.mainmap)
 
-    obj_1 = Obj(mapy.maincart)
+    obj_1 = Obj(mapy.mainmap)
     obj_1.random_obj()
-    obj_2 = Obj(mapy.maincart)
+    obj_2 = Obj(mapy.mainmap)
     obj_2.random_obj()
-    obj_3 = Obj(mapy.maincart)
+    obj_3 = Obj(mapy.mainmap)
     obj_3.random_obj()
-    nonsup()
+    check_superposition()
 
     display_map(mac)
 

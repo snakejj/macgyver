@@ -7,18 +7,18 @@ class Map:
     """
 
     def __init__(self):
-        self.maincart = []
+        self.mainmap = []
 
     def load_cart(self):
-        # opening map.txt in cart_file variable
-        with open("map.txt", "r") as cart_file:
-            cart = []
-            for line in cart_file:
-                cart_l = []
+        # opening map.txt in mapo_file variable
+        with open("map.txt", "r") as mapo_file:
+            mapo = []
+            for line in mapo_file:
+                mapo_l = []
                 for character in line:
                     if character != "\n":
-                        cart_l.append(character)
+                        mapo_l.append(character)
 
-                if cart_l:
-                    cart.append(cart_l)
-        self.maincart = cart
+                if mapo_l:
+                    mapo.append(mapo_l)
+        self.mainmap = mapo
